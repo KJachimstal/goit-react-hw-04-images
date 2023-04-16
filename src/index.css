@@ -1,4 +1,7 @@
-@import-normalize; /* bring in normalize.css styles */
+@import-normalize;
+/* bring in normalize.css styles */
+@import './styles/styles.css';
+@import "yet-another-react-lightbox/styles.css";
 
 body {
   margin: 0;
