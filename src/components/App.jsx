@@ -16,7 +16,6 @@ export const App = () => {
   const [query, setQuery] = useState('');
 
   const fetchImages = async (query, page) => {
-    console.log(query);
     setIsLoading(true);
     try {
       const response = await api.fetchImagesWithQuery(query, page, PER_PAGE);

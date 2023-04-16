@@ -1,4 +1,4 @@
-import { Component } from 'react';
+import { useState } from 'react';
 import { ImageGalleryItem } from './ImageGalleryItem';
 import Lightbox from 'yet-another-react-lightbox';
 import 'yet-another-react-lightbox/styles.css';
@@ -6,51 +6,45 @@ import * as React from 'react';
 import { nanoid } from 'nanoid';
 import { PropTypes } from 'prop-types';
 
-export class ImageGallery extends Component {
-  state = {
-    open: false,
-    index: 0,
-  };
+export const ImageGallery = props => {
+  const [open, setOpen] = useState(false);
+  const [index, setIndex] = useState(0);
 
-  setOpen = value => this.setState({ open: value });
-
-  onClick = id => {
-    const index = this.props.images.findIndex(image => image.id === id);
+  const onClick = id => {
+    const index = props.images.findIndex(image => image.id === id);
     if (index < 0) {
       alert('Image not found!');
     } else {
-      this.setState({ index });
-      this.setOpen(true);
+      setIndex(index);
+      setOpen(true);
     }
   };
 
-  render() {
-    const { images } = this.props;
-    return (
-      <>
-        <ul className="gallery">
-          {images.map(image => (
-            <ImageGalleryItem
-              src={image.previewURL}
-              alt={image.tags}
-              id={image.id}
-              key={nanoid()}
-              originalSrc={image.largeImageURL}
-              onClick={this.onClick}
-            />
-          ))}
-        </ul>
-        <Lightbox
-          open={this.state.open}
-          close={() => this.setOpen(false)}
-          index={this.state.index}
-          controller={{ closeOnBackdropClick: true }}
-          slides={images.map(image => ({ src: image.largeImageURL }))}
-        />
-      </>
-    );
-  }
-}
+  const { images } = props;
+  return (
+    <>
+      <ul className="gallery">
+        {images.map(image => (
+          <ImageGalleryItem
+            src={image.previewURL}
+            alt={image.tags}
+            id={image.id}
+            key={nanoid()}
+            originalSrc={image.largeImageURL}
+            onClick={onClick}
+          />
+        ))}
+      </ul>
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        index={index}
+        controller={{ closeOnBackdropClick: true }}
+        slides={images.map(image => ({ src: image.largeImageURL }))}
+      />
+    </>
+  );
+};
 
 ImageGallery.propTypes = {
   images: PropTypes.array.isRequired,
