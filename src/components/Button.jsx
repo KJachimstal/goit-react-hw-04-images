@@ -5,7 +5,7 @@ export class Button extends Component {
     return (
       <button
         className="search-form__button load-more"
-        onClick={this.props.handleLoadMore}
+        onClick={this.props.onLoadMore}
       >
         Load more
       </button>
@@ -14,5 +14,5 @@ export class Button extends Component {
 }
 
 Button.propTypes = {
-  handleLoadMore: PropTypes.func.isRequired,
+  onLoadMore: PropTypes.func.isRequired,
 };

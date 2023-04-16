@@ -5,7 +5,7 @@ export class Searchbar extends Component {
   render() {
     return (
       <header className="search-bar">
-        <form className="search-form" onSubmit={this.props.handleSearch}>
+        <form className="search-form" onSubmit={this.props.onSearch}>
           <input
             className="search-form__input"
             type="text"
@@ -23,5 +23,5 @@ export class Searchbar extends Component {
 }
 
 Searchbar.propTypes = {
-  handleSearch: PropTypes.func.isRequired,
+  onSearch: PropTypes.func.isRequired,
 };
